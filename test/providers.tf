@@ -10,9 +10,9 @@ terraform {
     backend "s3" {
     bucket         = "sampozki-thesis-state"
     key            = "test-terraform.tfstate"
-    region         = "eu-west-1"
-    encrypt        = true
-    dynamodb_table = "terraform-locks"
+    region         = "eu-north-1"
+    encrypt        = false
+    use_lockfile   = true
   }
 }
 

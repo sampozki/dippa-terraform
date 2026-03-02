@@ -10,7 +10,7 @@ Image directory contains the image used by Lambda
 
 Infra directory contains neces
 
-
+Test directory contains a simple test Terraform env that creates a S3 bucket
 
 
 

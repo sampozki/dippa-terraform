@@ -8,6 +8,8 @@ resource "aws_s3_bucket_versioning" "demo_versioning" {
   versioning_configuration {
     status = "Enabled"
   }
+
+
 }
 
 resource "random_id" "suffix" {
