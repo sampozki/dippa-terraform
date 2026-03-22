@@ -12,7 +12,7 @@ RUN yum -y install unzip curl && \
 # We'll run a minimal init that downloads the pinned provider, then copy it into /opt/tf-plugin-cache
 # Pin provider version via required_providers in backend.tf; Terraform will cache it.
 RUN mkdir -p /opt/tf-plugin-cache /tmp/tfinit
-COPY terraformrc /opt/terraformrc
+COPY image/terraformrc /opt/terraformrc
 ENV TF_CLI_CONFIG_FILE=/opt/terraformrc
 ENV TF_PLUGIN_CACHE_DIR=/opt/tf-plugin-cache
 ENV TF_IN_AUTOMATION=1 TF_INPUT=0
