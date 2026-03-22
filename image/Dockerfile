@@ -8,13 +8,10 @@ RUN yum -y install unzip curl && \
     rm -f /tmp/terraform.zip && \
     terraform version
 
-# --- prepare provider cache (aws) ---
-# We'll run a minimal init that downloads the pinned provider, then copy it into /opt/tf-plugin-cache
-# Pin provider version via required_providers in backend.tf; Terraform will cache it.
+# --- prepare provider mirror (aws) ---
+# Terraform runtime uses /opt/tf-plugin-cache as a filesystem mirror, so populate it
+# with `terraform providers mirror` during image build.
 RUN mkdir -p /opt/tf-plugin-cache /tmp/tfinit
-COPY image/terraformrc /opt/terraformrc
-ENV TF_CLI_CONFIG_FILE=/opt/terraformrc
-ENV TF_PLUGIN_CACHE_DIR=/opt/tf-plugin-cache
 ENV TF_IN_AUTOMATION=1 TF_INPUT=0
 
 RUN cat > /tmp/tfinit/backend.tf <<'EOF'
@@ -29,9 +26,11 @@ terraform {
 EOF
 
 RUN cd /tmp/tfinit \
- && terraform init -input=false \
- && rm -rf /tmp/tfinit/.terraform \
+ && terraform providers mirror /opt/tf-plugin-cache \
  && rm -rf /tmp/tfinit
+
+COPY image/terraformrc /opt/terraformrc
+ENV TF_CLI_CONFIG_FILE=/opt/terraformrc
 
 # --- app code ---
 COPY app/app.py ${LAMBDA_TASK_ROOT}/app.py

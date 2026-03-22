@@ -42,7 +42,6 @@ def _terraform_env() -> Dict[str, str]:
     env["TF_INPUT"] = "0"
     env["TF_CLI_ARGS"] = "-no-color"
     env["TF_CLI_ARGS_plan"] = "-lock=false"
-    env["TF_PLUGIN_CACHE_DIR"] = "/opt/tf-plugin-cache"
     env["TF_CLI_CONFIG_FILE"] = "/opt/terraformrc"
     return env
 
