@@ -17,17 +17,18 @@ ENV TF_CLI_CONFIG_FILE=/opt/terraformrc
 ENV TF_PLUGIN_CACHE_DIR=/opt/tf-plugin-cache
 ENV TF_IN_AUTOMATION=1 TF_INPUT=0
 
-RUN cat > /tmp/tfinit/backend.tf <<'EOF'\n\
-terraform {\n\
-  required_providers {\n\
-    aws = {\n\
-      source  = "hashicorp/aws"\n\
-      version = "~> 5.0"\n\
-    }\n\
-  }\n\
-}\n\
-EOF\n\
- && cd /tmp/tfinit \
+RUN cat > /tmp/tfinit/backend.tf <<'EOF'
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+EOF
+
+RUN cd /tmp/tfinit \
  && terraform init -input=false \
  && rm -rf /tmp/tfinit/.terraform \
  && rm -rf /tmp/tfinit
