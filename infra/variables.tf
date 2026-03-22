@@ -26,7 +26,6 @@ variable "name" {
 variable "state_bucket" {
   type        = string
   description = "Name of the S3 bucket containing the Terraform state file to monitor."
-  default     = "sampozki-thesis-state"
 }
 
 variable "state_key" {
