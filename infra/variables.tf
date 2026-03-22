@@ -26,19 +26,19 @@ variable "name" {
 variable "state_bucket" {
   type        = string
   description = "Name of the S3 bucket containing the Terraform state file to monitor."
-  default = "arn:aws:s3:::sampozki-thesis-state"
+  default     = "sampozki-thesis-state"
 }
 
 variable "state_key" {
   type        = string
   description = "Object key (path) of the Terraform state file inside the S3 bucket."
-  default = "test-terraform.tfstate"
+  default     = "test-terraform.tfstate"
 }
 
 variable "state_region" {
   type        = string
   description = "AWS region where the monitored Terraform state bucket resides."
-  default = "eu-north-1"
+  default     = "eu-north-1"
 }
 
 variable "results_bucket" {

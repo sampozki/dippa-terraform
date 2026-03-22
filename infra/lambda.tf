@@ -33,6 +33,13 @@ resource "aws_iam_policy" "lambda_policy" {
         Resource = "${aws_cloudwatch_log_group.lambda.arn}:*"
       },
 
+      # Allow Terraform S3 backend to discover and read the monitored state.
+      {
+        Effect = "Allow",
+        Action = ["s3:ListBucket"],
+        Resource = "arn:aws:s3:::${var.state_bucket}"
+      },
+
       # Read only specific Terraform state file
       {
         Effect = "Allow",
