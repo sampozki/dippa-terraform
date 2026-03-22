@@ -74,6 +74,10 @@ resource "aws_lambda_function" "this" {
   timeout     = 900
   memory_size = 512
 
+  ephemeral_storage {
+    size = 2048
+  }
+
   environment {
     variables = {
       STATE_BUCKET   = var.state_bucket
